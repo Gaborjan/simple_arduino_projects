@@ -17,7 +17,7 @@ void loop(){
   // default to LED's off
   //ledOnOff({0,0,0,0,0,0,0,0});
   diodeLevel=analogRead(photoPin);
-  lightLevel=map(diodeLevel,0,600,1,8);
+  lightLevel=map(diodeLevel,0,800,1,8);
   lightLevel=constrain(lightLevel,1,8);
   Serial.print("Diode level: ");
   Serial.print(diodeLevel);
@@ -26,28 +26,28 @@ void loop(){
   Serial.println();
   //lightLevel=constrain(lightLevel,1,8);
   switch (lightLevel) {
-    case 8:
+    case 1:
       ledOnOff({1,1,1,1,1,1,1,1});
       break;  
-    case 7:
+    case 2:
       ledOnOff({1,1,1,1,1,1,1,0});
       break; 
-    case 6:
+    case 3:
       ledOnOff({1,1,1,1,1,1,0,0});
       break;  
-    case 5:
+    case 4:
       ledOnOff({1,1,1,1,1,0,0,0});
       break; 
-    case 4:
+    case 5:
       ledOnOff({1,1,1,1,0,0,0,0});
       break;  
-    case 3:
+    case 6:
       ledOnOff({1,1,1,0,0,0,0,0});
       break; 
-    case 2:
+    case 7:
       ledOnOff({1,1,0,0,0,0,0,0});
       break;  
-    case 1:
+    case 8:
       ledOnOff({1,0,0,0,0,0,0,0});
       break; 
   }
