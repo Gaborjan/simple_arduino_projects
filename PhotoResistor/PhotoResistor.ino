@@ -1,8 +1,14 @@
 
 const int ledPins[] = {2,3,4,5,6,7,8,9}; //LED channels we use
 const int photoPin = A0; // photo diode analag channel
+const int maxALevel=500; //max. light level that we process from photo resistor
+//the real max. is 1023, though should optimalization, depends on circumstances
+//the lighter place should use smaller value
+const int minLED=1; //min. pieces of LED
+const int maxLED=8; //max. pieces of LED
 int lightLevel=0;
 int diodeLevel=0;
+
 
 
 void setup() {
@@ -17,14 +23,12 @@ void loop(){
   // default to LED's off
   //ledOnOff({0,0,0,0,0,0,0,0});
   diodeLevel=analogRead(photoPin);
-  lightLevel=map(diodeLevel,0,800,1,8);
-  lightLevel=constrain(lightLevel,1,8);
+  lightLevel=constrain(map(diodeLevel,0,maxALevel,minLED,maxLED),minLED,maxLED);
   Serial.print("Diode level: ");
   Serial.print(diodeLevel);
   Serial.print("     Light level: ");
   Serial.print(lightLevel);
   Serial.println();
-  //lightLevel=constrain(lightLevel,1,8);
   switch (lightLevel) {
     case 1:
       ledOnOff({1,1,1,1,1,1,1,1});
